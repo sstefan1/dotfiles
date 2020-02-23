@@ -11,6 +11,14 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" call clang-format on save
+function! FormatOnSave()
+    let l:formatdiff = 1
+    py3f ~/llvm/llvm-project/clang/tools/clang-format/clang-format.py
+endfunction
+
+autocmd BufWritePre *.h,*.hh,*hxx,*.cc,*.cpp,*.cxx call FormatOnSave()
+
 function! NumberToggle()
     if(&relativenumber == 1)
         set norelativenumber
